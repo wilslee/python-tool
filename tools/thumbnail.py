@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import os
 from PIL import Image
-from django.conf import settings
 
 
 def get_thumb_size(image, thumb_width=None, thumb_height=None):

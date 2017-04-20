@@ -1,7 +1,6 @@
 # usr/bin/env python
 # -*- coding: utf-8 -*-
 import xlrd
-from decimal import Decimal
 from xlrd.biffh import XLRDError
 
 
@@ -46,10 +45,13 @@ class ExcelReader(object):
             for key, c in read_list.items():
                 value = sheet_table.cell_value(r, c)
                 # 数字转化为字符串
-                if sheet_table.cell_type(r, c) == 2:
-                    value = str(sheet_table.cell_value(r, c))
+                if sheet_table.cell_type(r, c) == xlrd.XL_CELL_NUMBER:
+                    value = str(sheet_table.cell_value(r, c)).strip()
+                elif sheet_table.cell_type(r, c) == xlrd.XL_CELL_TEXT:
+                    value = str(sheet_table.cell_value(r, c)).strip().strip('\0')
                 cols.update({key: value})
             dataset.append(cols)
         self._data_set = dataset
 
 ecreader = ExcelReader()
+

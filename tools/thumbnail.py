@@ -5,6 +5,13 @@ from PIL import Image
 
 
 def get_thumb_size(image, thumb_width=None, thumb_height=None):
+    """
+    默认返回原图一半大小，如果给定大小则按比例缩放
+    :param image:
+    :param thumb_width:
+    :param thumb_height:
+    :return:
+    """
     width, height = image.size
     if thumb_width and thumb_height is None:
         thumb_height = int((thumb_width/width) * height)
